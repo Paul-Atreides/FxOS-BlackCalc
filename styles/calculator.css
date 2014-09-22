@@ -1,0 +1,189 @@
+/*
+ * Initializing defaults for html and body tags
+ */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-weight: normal;
+  background-color: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+/*  height: 100%; */
+  display: block;
+  overflow: hidden;
+  font-family: "fira sans",  "sans-serif";
+}
+
+/*
+ * Test for landscape orientation but there must be a complet different
+ * keyboard layout
+ */
+@media (orientation: landscape) and (min-width: 479px){
+  body, html {
+    background-color: green;
+    font-size: 6px;
+
+  }
+  input {
+
+    color: yellow;
+    background-color: green;
+ }
+}
+
+/*
+ * This are the fixed settings for display size lt. 460px (=480px display - 20px status display)
+ * Should only occur when screen keyboard is displayed
+ */
+
+/*
+ * Headline for application Name
+ */
+
+.app-name {
+
+  height:30px;
+  color: #fff;
+  background-color: #000;
+  margin: 0 2px;
+  padding: 2px 0 0 0;
+  text-align: center;
+  vertical-align: bottom;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/*
+ * Result display
+ */
+#result {
+  text-align:right;
+  height: 55px;
+  margin: 0px 2px;
+  padding: 5px 5px;
+  width: calc(100% - 16px);
+  font-size: 4.5rem;
+  color: #fff;
+  background-color: #222;
+  border: 1px solid #222;
+
+}
+
+/*
+ * Kelog history display
+ */
+#keylog {
+  text-align:right;
+  height: 16px;
+  margin: 0px 2px 23px;
+  padding: 6px 5px 6px;
+  width: calc(100% - 16px);
+  font-size: 1.5rem;
+  color: #ff0;
+  background-color: #000;
+  border: 1px solid #222;
+  border-left-color: black;
+  border-right-color: black;
+}
+
+/*
+ * The keyboard
+ */
+.keypad-row {
+  margin: 0px 2px;
+  display: block;
+}
+
+input {
+  -moz-appearance: none;
+  padding: 0px;
+  margin: 0;
+
+  color: white;
+  background-color: black;
+  background: transparent;
+  font-weight: normal;
+  font-size: 2.5rem;
+  border: 1px solid black;
+
+  width: 20%;
+  height: 62px;
+
+  /* For an easier touch target, buttons are not exactly centered and
+     are bigger at the bottom */
+  padding-bottom: 9px;
+
+  /* text nodes in the source code affect the layout */
+  margin-right: -3px;
+}
+
+/*
+ * 'ZTE Open C' has physical display dimensions of 480 x 800 px
+ * resulting in 320px x 533px
+ * Subtract about 20px for status line on top - so 513px remaining for app
+ *
+ * 'Y' axis streching is calculated via 'vh' that depends on display height.
+ */ 
+@media (orientation: portrait) and (min-height: 460px){
+
+  /* 1.0vh = 4.6 px at 460px  = 5.15 px at 515px */
+  .app-name {
+    height:6.5vh;
+    padding: 0.5vh 0 0 0;
+  }
+  
+
+  #result {
+/*    height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
+/*    padding: calc(10.5vh - 43px) 5px 5px;  /*  5px at 460px -> 11px at 515px */
+    
+  }
+  
+  #keylog {
+    height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */ 
+    margin: 0px 2px calc(2vh + 14px); /* 23px at 460px -> 24px at 515px */
+  }
+  
+  input {
+    height: calc(14vh - 2px);  /* 62px at 460px -> 70px at 515px */ 
+    padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
+  }
+
+}
+
+
+/*
+ * Background Color of active keys (while pressed
+ */
+input#button-key:active,
+input#num-key:active,
+input#oper-key:active,
+input#compute-key:active,
+input#spec-key:active,
+input#clear-key:active {
+
+  background: #0080FF;
+}
+
+/* Color of special keys (Clear all and Clear entry)
+ */
+input#clear-key{
+
+  color: #f00;
+}
+
+/* Color of compute key
+ */
+input#compute-key{
+
+  color: #aaf;
+  font-weight: bolder;
+
+}
+
+
+

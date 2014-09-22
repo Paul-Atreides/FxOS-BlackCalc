@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scaleable=no">
+    <meta name="description" content="Simple Calculator with basic functionality, history and memory function">
+    <meta name="keywords" content="Calculator">
+    <meta name="author" content="Paul Atreides">
+
+    <title>Calculator</title>
+    <link type="text/css" rel="stylesheet" href="styles/calculator.css">
+  </head>
+
+  <body>
+
+    <div class="app-name">Black Calculator</div>
+
+    <div id="result">0</div> <!-- the result display -->
+    <div id="keylog"> </div> <!-- the keylog history display -->
+
+    <FORM name="black-calculator">
+
+    <div class="keypad-row">
+      <input type="button" id="clear-key"	value="C"   data-type="clear"/>
+      <input type="button" id="clear-key" 	value="←" 	data-type="delete"/>
+      <input type="button" id="spec-key"  	value="Sto" data-type="store"/>
+      <input type="button" id="spec-key"  	value="Rcl" data-type="recall"/>
+      <input type="button" id="oper-key"  	value="%" 	data-type="unary" />
+    </div>
+
+
+    <div class="keypad-row">
+      <input type="button" id="num-key"   value="7"     data-type="number"/>
+      <input type="button" id="num-key"   value="8"     data-type="number"/>
+      <input type="button" id="num-key"   value="9"     data-type="number"/>
+      <input type="button" id="oper-key"  value="÷"   data-type="binary" />
+      <input type="button" id="oper-key"  value="√"  data-type="unary" />
+    </div>
+
+    <div class="keypad-row">
+      <input type="button" id="num-key" value="4"   data-type="number"/>
+      <input type="button" id="num-key" value="5"   data-type="number" />
+      <input type="button" id="num-key" value="6"   data-type="number" />
+      <input type="button" id="oper-key" value="×"  data-type="binary"/>
+      <input type="button" id="oper-key" value="x²" data-type="unary"/>
+    </div>
+
+    <div class="keypad-row">
+      <input type="button" id="num-key" value="1" data-type="number"/>
+      <input type="button" id="num-key" value="2" data-type="number"/>
+      <input type="button" id="num-key" value="3" data-type="number" />
+      <input type="button" id="oper-key" value="-" data-type="binary"/>
+      <input type="button" id="oper-key"  value="1/x"   data-type="unary"/>
+    </div>
+
+    <div class="keypad-row">
+      <input type="button" id="num-key"     value="0"   data-type="number"/>
+      <input type="button" id="num-key"     value="."   data-type="point"/>
+      <input type="button" id="compute-key" value="="   data-type="compute" />
+      <input type="button" id="oper-key"    value="+"   data-type="binary"/>
+      <input type="button" id="num-key"     value="+/-" data-type="sign"/>
+    </div>
+
+    </FORM>
+    <script type="text/javascript" src="scripts/calculator.js" ></script>
+
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "name": "Calculator",
+  "description": "Simple Calculator with basic functionality, history and memory function",
+  "version": "1.2.0",
+  "type": "web",
+  "launch_path": "/calculator.html",
+  "developer": {
+    "name": "Paul Atreides",
+    "url": "https://github.com/Paul-Atreides/FxOS-BlackCalc"
+  },
+  "icons": {
+    "60": "/images/icons/icon_60_white_calc.png",
+    "128": "/images/icons/icon_128_white_calc.png"
+  },
+  "orientation": "portrait-primary",
+  "csp": "default-src *; script-src 'self' 'unsafe-eval'; object-src 'none'; style-src 'self' 'unsafe-inline'",
+  "locales": {
+    "fr": {
+      "name": "Calculatrice",
+      "description": "Calculatrice"
+    },
+    "pl": {
+      "name": "Kalkulator",
+      "description": "Kalkulator"
+    },
+    "es": {
+      "name": "Calculadora",
+      "description": "Calculadora"
+    },
+    "pt": {
+      "name": "Calculadora",
+      "description": "Calculadora"
+    },
+    "cs": {
+      "name": "Kalkulacka",
+      "description": "Kalkulacka"
+    },
+    "de": {
+      "name": "Rechner",
+      "description": "Einfacher Rechner mit Standardfunktionen, sowie Speichertaste und History Anzeige"
+    },
+    "hu": {
+      "name": "Számológép",
+      "description": "Számológép"
+    },
+    "ro": {
+      "name": "Calculator",
+      "description": "Calculator"
+    }
+  },
+  "default_locale": "en"
+}
