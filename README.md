@@ -10,4 +10,5 @@ It supports basic arithmetic operations, and some advanced functions
 * reciprocal function and 
 * percent function
 
-This is accomplished by a simple memory function.
+This is extended by a simple memory function.
+It features a history line which displays the last operations.

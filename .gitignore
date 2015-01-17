@@ -1,0 +1,7 @@
+# Lines that start with '#' are comments.
+
+# ZIP Files are used for upload to FXOS marketplace - don't use in project
+*.zip
+
+# Editor backup files
+*.bak
