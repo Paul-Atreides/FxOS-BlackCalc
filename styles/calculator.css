@@ -19,23 +19,6 @@ body {
 }
 
 /*
- * Test for landscape orientation but there must be a complet different
- * keyboard layout
- */
-@media (orientation: landscape) and (min-width: 479px){
-  body, html {
-    background-color: green;
-    font-size: 6px;
-
-  }
-  input {
-
-    color: yellow;
-    background-color: green;
- }
-}
-
-/*
  * This are the fixed settings for display size lt. 460px (=480px display - 20px status display)
  * Should only occur when screen keyboard is displayed
  */
@@ -50,7 +33,7 @@ body {
   color: #fff;
   background-color: #000;
   margin: 0 2px;
-  padding: 2px 0 0 0;
+  padding: 4px 0 0 0;
   text-align: center;
   vertical-align: bottom;
   font-weight: bold;
@@ -70,7 +53,6 @@ body {
   color: #fff;
   background-color: #222;
   border: 1px solid #222;
-
 }
 
 /*
@@ -80,19 +62,20 @@ body {
   text-align:right;
   height: 16px;
   margin: 0px 2px 23px;
-  padding: 6px 5px 6px;
+  padding: 0px 5px 6px;
   width: calc(100% - 16px);
   font-size: 1.5rem;
-  color: #ff0;
-  background-color: #000;
+  color: yellow;
+  background-color: #222;
   border: 1px solid #222;
-  border-left-color: black;
-  border-right-color: black;
 }
 
 /*
  * The keyboard
  */
+#keypad {
+  width: 320px;
+}
 .keypad-row {
   margin: 0px 2px;
   display: block;
@@ -110,8 +93,8 @@ input {
   font-size: 2.5rem;
   border: 1px solid black;
 
-  width: 20%;
   height: 62px;
+  width: 63px;
 
   /* For an easier touch target, buttons are not exactly centered and
      are bigger at the bottom */
@@ -121,40 +104,112 @@ input {
   margin-right: -3px;
 }
 
+
 /*
  * 'ZTE Open C' has physical display dimensions of 480 x 800 px
  * resulting in 320px x 533px
  * Subtract about 20px for status line on top - so 513px remaining for app
  *
  * 'Y' axis streching is calculated via 'vh' that depends on display height.
- */ 
-@media (orientation: portrait) and (min-height: 460px){
+ */
+@media (orientation: portrait) and (min-height: 461px) {
 
-  /* 1.0vh = 4.6 px at 460px  = 5.15 px at 515px */
+  /* 1.0vh = 4.6 px at hight 460px  = 5.15 px at 515px */
+
   .app-name {
     height:6.5vh;
-    padding: 0.5vh 0 0 0;
+    padding: 0.9vh 0 0 0;
+    font-size: 4.3vh;
   }
-  
 
   #result {
-/*    height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
-/*    padding: calc(10.5vh - 43px) 5px 5px;  /*  5px at 460px -> 11px at 515px */
-    
+    margin: 0px 2px;
+    height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
+    padding: calc(8vh - 32px) 5px 5px;  /*  5px at 460px -> 11px at 515px */
   }
-  
+
   #keylog {
-    height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */ 
+    height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
     margin: 0px 2px calc(2vh + 14px); /* 23px at 460px -> 24px at 515px */
+    font-size: 3.26vh;
   }
-  
+
   input {
-    height: calc(14vh - 2px);  /* 62px at 460px -> 70px at 515px */ 
+    height: calc(14vh - 2px);  /* 62px at 460px -> 70px at 515px */
     padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
+    font-size: 5.4vh;
   }
 
 }
 
+/* 'X' axis streching is calculated via 'vw' that depends on display width.
+ */
+@media (orientation: portrait) and (min-width: 321px) {
+
+  /* 1.0vw = 3.2 px at width 320px */
+  .app-name {
+    font-size: 7.1vw;
+  }
+
+  #result {
+    font-size: 14vw;
+  }
+
+  #keylog {
+    font-size: 5vw;
+  }
+
+  #keypad {
+    width: 100%;
+  }
+
+  input {
+    width: 19.69vw;           /* 63px at width 320px */
+    font-size: 7.8vw;         /* 25px at 320px */
+  }
+}
+
+/*
+ * Test for landscape orientation but there must be a complet different
+ * keyboard layout
+ */
+@media (orientation: landscape) and (min-width: 479px){
+  body, html {
+    background-color: lightblue;
+
+  }
+
+  .app-name {
+    display: none;
+  }
+
+  #result {
+    height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
+    margin: 2px 2px 0px;
+    padding: calc(8vh - 32px) 5px 5px;  /*  5px at 460px -> 11px at 515px */
+  }
+
+  #keypad {
+    width: 100%;
+  }
+
+  input {
+    color: blue;
+    background-color: lightblue;
+    width: calc(20% - 5px);
+    height: calc(14vh - 4px);  /* 62px at 460px -> 70px at 515px */
+    margin: 2px 1px;
+    padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
+    border: 2px solid;
+    border-radius: 25px;
+    border-color: whitesmoke;
+  }
+
+}
+
+/*
+ * Media independent settings
+ */
 
 /*
  * Background Color of active keys (while pressed
@@ -172,18 +227,13 @@ input#clear-key:active {
 /* Color of special keys (Clear all and Clear entry)
  */
 input#clear-key{
-
   color: #f00;
 }
 
 /* Color of compute key
  */
 input#compute-key{
-
   color: #aaf;
   font-weight: bolder;
-
 }
-
-
 
