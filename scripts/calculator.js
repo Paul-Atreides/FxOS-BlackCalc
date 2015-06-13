@@ -273,6 +273,15 @@ function specialKeyPressed () {
 }
 
 /**
+ * Key 'Convert-To' or 'Convert-From' key is pressed
+ */
+function convertKeyPressed () {
+  var value = this.value,
+      datatype =this.dataset.type;
+  console.log("Convert Key pressed ", value, datatype);
+}
+
+/**
  * The calculate key ('=') is pressed
  */
 function calculateKeyPressed () {
@@ -318,6 +327,7 @@ window.onload = function () {
   // elements that that are often used in the code
   resultdisp = document.getElementById("result");
   keylogdisp = document.getElementById("keylog");
+  var clickEvent = ('ontouchstart' in window ? 'touchend' : 'click');  //prefer touch events if available (faster reaction)
 
   // All the listeners for the interface buttons and for the input changes
   // This is an awful hack as getElementsByID could not be used, because
@@ -329,24 +339,27 @@ window.onload = function () {
   for(i=0 ; i<bk.length ; i++) {
     switch(bk[i].id) {  //different ID's for differnet type of keys
       case "num-key" :
-        bk[i].addEventListener("click", numberKeyPressed);
+        bk[i].addEventListener(clickEvent, numberKeyPressed);
         break;
       case "oper-key" :
-        bk[i].addEventListener("click", operationKeyPressed);
+        bk[i].addEventListener(clickEvent, operationKeyPressed);
         break;
       case "spec-key" :
-        bk[i].addEventListener("click", specialKeyPressed);
+        bk[i].addEventListener(clickEvent, specialKeyPressed);
         break;
       case "compute-key" :
-        bk[i].addEventListener("click", calculateKeyPressed);
+        bk[i].addEventListener(clickEvent, calculateKeyPressed);
         break;
       case "clear-key" :
-        bk[i].addEventListener("click", clearKeyPressed);
+        bk[i].addEventListener(clickEvent, clearKeyPressed);
         //bk[i].onclick = clearKeyPressed;
         break;
       default : break;
     }
   }
+
+  document.getElementById('btn-convertto').addEventListener(clickEvent, convertKeyPressed);
+  document.getElementById('btn-convertfrom').addEventListener(clickEvent, convertKeyPressed);
 
 
   initCalculator();

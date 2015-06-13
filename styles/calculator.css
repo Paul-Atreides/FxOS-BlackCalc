@@ -6,6 +6,7 @@ html, body {
   padding: 0;
   font-size: 10px;
   font-weight: normal;
+  color: #FFF;
   background-color: #000;
 }
 
@@ -15,7 +16,7 @@ body {
 /*  height: 100%; */
   display: block;
   overflow: hidden;
-  font-family: "fira sans",  "sans-serif";
+  font-family: "fira sans", "sans-serif";
 }
 
 /*
@@ -27,83 +28,151 @@ body {
  * Headline for application Name
  */
 
-.app-name {
+header {
+  position: relative;
+  width: 100%;
+  display: block;
+  padding: 0;
+  height: 100%;
+  border: none;
+}
 
-  height:30px;
-  color: #fff;
-  background-color: #000;
-  margin: 0 2px;
-  padding: 4px 0 0 0;
-  text-align: center;
-  vertical-align: bottom;
-  font-weight: bold;
+header.fixed {
+  position: absolute;
+}
+
+/*
+header:first-child {
+  border: none;
+
+}
+*/
+header h1 {
   font-size: 2rem;
+  height: 32px;
+  line-height: 32px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 1rem;
+  font-weight: 300;
+  text-align: center;
 }
 
 /*
  * Result display
  */
-#result {
+
+section .display {
   text-align:right;
-  height: 55px;
-  margin: 0px 2px;
-  padding: 5px 5px;
-  width: calc(100% - 16px);
-  font-size: 4.5rem;
-  color: #fff;
   background-color: #222;
   border: 1px solid #222;
+  margin: 0px 2px;
+  padding: 5px 5px;
+}
+
+.display #result {
+  height: 55px;
+  font-size: 4.5rem;
 }
 
 /*
  * Kelog history display
  */
 #keylog {
-  text-align:right;
   height: 16px;
-  margin: 0px 2px 23px;
-  padding: 0px 5px 6px;
-  width: calc(100% - 16px);
+  line-height: 16px;
   font-size: 1.5rem;
   color: yellow;
-  background-color: #222;
-  border: 1px solid #222;
 }
 
 /*
  * The keyboard
  */
-#keypad {
-  width: 320px;
-}
-.keypad-row {
-  margin: 0px 2px;
-  display: block;
+
+.convert-row {
+  width: 300px;           /* 320px - 2*10px margin */
+  margin: 5px 10px;
+  display: table;
+  table-layout: fixed;
+  visibility: visible;
+  height: 30px;
+  margin-top: 5px;
 }
 
+.convert-description {
+  display: table-cell;
+  width: calc(2rem * 7);
+  padding-left: 20px;
+  margin: 0 5px;
+  font-size: 2rem;
+  overflow:hidden;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+.convert-btn {
+  display: table-cell;
+  font-size: 2rem;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding: 0px 3px;
+  border: 1px solid;
+  margin: 0 5px;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+}
+
+section .keypad {
+  width: 300px;           /* 320px - 2*10px margin */
+  height: calc(100% - 0rem);
+  margin: 0px 10px;
+  display: table;
+  table-layout: fixed;
+}
+
+.keypad-row {
+  display: table-row;
+}
+.keypad-button {
+  display: table-cell;
+  height: 62px;
+  width: 63px;
+  font-size: 3.0rem;
+  font-weight: 400;
+  margin: 0 -3px 0 0;
+  border: 1px solid transparent;
+  padding: 0px 0.5rem 0.9rem 0px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  background: transparent;
+  color: white;
+
+}
+
+/*
 input {
-  -moz-appearance: none;
   padding: 0px;
   margin: 0;
-
   color: white;
   background-color: black;
   background: transparent;
-  font-weight: normal;
-  font-size: 2.5rem;
-  border: 1px solid black;
-
+  font-weight: 400;
+  font-size: 3rem;
+  border: 1px solid transparent;
+  display: table-cell;
+  padding: 0px 0.5rem 0.9rem 0px;
   height: 62px;
   width: 63px;
-
-  /* For an easier touch target, buttons are not exactly centered and
-     are bigger at the bottom */
-  padding-bottom: 9px;
-
-  /* text nodes in the source code affect the layout */
   margin-right: -3px;
 }
-
+*/
 
 /*
  * 'ZTE Open C' has physical display dimensions of 480 x 800 px
@@ -116,28 +185,30 @@ input {
 
   /* 1.0vh = 4.6 px at hight 460px  = 5.15 px at 515px */
 
-  .app-name {
-    height:6.5vh;
-    padding: 0.9vh 0 0 0;
+  header h1 {
     font-size: 4.3vh;
+    height: 6.96vh;
+    line-height: 6.96vh;
   }
 
-  #result {
-    margin: 0px 2px;
+  section .display {
+  }
+
+  .display #result {
     height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
-    padding: calc(8vh - 32px) 5px 5px;  /*  5px at 460px -> 11px at 515px */
+    line-height: calc(10.1vh + 9px);
   }
 
   #keylog {
     height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
-    margin: 0px 2px calc(2vh + 14px); /* 23px at 460px -> 24px at 515px */
-    font-size: 3.26vh;
+    line-height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
+    font-size: 3.25vh;               /* 1.5rem at 460px -> 1.68rem at 515px */
   }
 
-  input {
+  .keypad-button {
     height: calc(14vh - 2px);  /* 62px at 460px -> 70px at 515px */
     padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
-    font-size: 5.4vh;
+    font-size: 6.5vh;               /* 3rem at 460px -> 3.3rem at 515px */
   }
 
 }
@@ -147,11 +218,12 @@ input {
 @media (orientation: portrait) and (min-width: 321px) {
 
   /* 1.0vw = 3.2 px at width 320px */
-  .app-name {
-    font-size: 7.1vw;
+
+  header h1 {
+    font-size: 6.25vw;
   }
 
-  #result {
+  .display #result {
     font-size: 14vw;
   }
 
@@ -159,13 +231,17 @@ input {
     font-size: 5vw;
   }
 
-  #keypad {
-    width: 100%;
+  .convert-row {
+    width: calc(100% - 20px);           /* 300px ad width 320px */
   }
 
-  input {
+  section .keypad {
+    width: calc(100% - 20px);           /* 300px ad width 320px */
+  }
+
+  .keypad-button {
     width: 19.69vw;           /* 63px at width 320px */
-    font-size: 7.8vw;         /* 25px at 320px */
+    font-size: 9.375vw;       /* 30px at 320px */
   }
 }
 
@@ -186,18 +262,18 @@ input {
   #result {
     height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
     margin: 2px 2px 0px;
-    padding: calc(8vh - 32px) 5px 5px;  /*  5px at 460px -> 11px at 515px */
+    padding: calc(8vh - 32px) 5px 5px;     /* 5px at 460px -> 11px at 515px */
   }
 
   #keypad {
     width: 100%;
   }
 
-  input {
+  .keypad-button {
     color: blue;
     background-color: lightblue;
     width: calc(20% - 5px);
-    height: calc(14vh - 4px);  /* 62px at 460px -> 70px at 515px */
+    height: calc(14vh - 4px);    /* 62px at 460px -> 70px at 515px */
     margin: 2px 1px;
     padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
     border: 2px solid;
@@ -219,7 +295,9 @@ input#num-key:active,
 input#oper-key:active,
 input#compute-key:active,
 input#spec-key:active,
-input#clear-key:active {
+input#clear-key:active,
+.keypad-button:active,
+.convert-btn:active {
 
   background: #0080FF;
 }
