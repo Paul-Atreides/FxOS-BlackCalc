@@ -231,7 +231,6 @@ function operationKeyPressed () {
       if(bDisplayEditable) {
         updateHistory(resultdisp.textContent); //actual value to history
       }
-      updateHistory(value); //always operation key to history
 
       if (sOperation === null) { //first time operation key pressed
         sOperation = value;
@@ -239,11 +238,13 @@ function operationKeyPressed () {
         nOperator2 = null;
       } else {                  //subsequent operation key pressed
         if (bDisplayEditable) { //only if normal key pressed meanwhile
+          updateHistory("[=]");
           displayResult(calculate());
           sOperation = value;
           nOperator1 = nDispValue;
         }
       }
+      updateHistory(value); //always operation key to history
       break;
     
     default: break;
