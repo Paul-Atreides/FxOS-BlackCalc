@@ -1,12 +1,13 @@
-﻿/*
+/*
 
 Description: Simple Calculator with basic functionality, history and memory function
 Developed by: Paul Atreides
 Source Code: https://github.com/Paul-Atreides/FxOS-BlackCalc
 
 */
+/* jshint undef: true, unused: true, browser: true, strict: true */
+/* globals console: false */
 
-'use strict';
 var MAX_DISPLAY_DIGITS = 12;
 var MAX_DISPLAY_NUMBER = Math.pow(10, MAX_DISPLAY_DIGITS) -1;
 var MAX_KEYLOG_DIGITS = 38;
@@ -14,46 +15,82 @@ var resultdisp, keylogdisp;
 var sOperation;
 var nDispValue, nOperator1, nOperator2, nStore;
 var bDisplayEditable;
+var oSettings = new Settings(true);
 
 //MathX.prototype=new Object();
 function MathX () { }
-MathX.prototype = {};
- MathX.round = function(num, decimals) {
+//MathX.prototype = {};
+
+MathX.round = function(num, decimals) {
+  'use strict';
   return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
 };
 
 Math.roundN = function(num, decimals) {
+  'use strict';
   return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
 };
 
+function Settings(vibration, vibTime, keyklick, unitRatio, convertUnitFrom, convertUnitTo) {
+  'use strict';
+  this.vibration = vibration || false;
+  this.vibTime = vibTime || 60;
+  this.keyklick = keyklick || false;
+  this.unitRatio = unitRatio || 3.6;
+  this.convertUnitFrom = convertUnitFrom || "m/s";
+  this.convertUnitTo = convertUnitTo || "km/h";
+}
+
+Settings.prototype.save = function () {
+  // save configuration to local store
+  'use strict';
+  console.log("function Settings.save() called");
+};
+
+Settings.prototype.load = function () {
+  // load configuration from local store
+  'use strict';
+  console.log("function Settings.load() called");
+};
+
 function clearCalculator () {
+  'use strict';
   console.log("function clearCalculator() called");
   resultdisp.textContent = "0";
   keylogdisp.textContent = "";
   nDispValue = 0;
   nOperator1 = nOperator2 = null;
   sOperation = null;
-  bDisplayEditable = false;
+  bDisplayEditable = true;
 
 }
 function initCalculator () {
+  'use strict';
   console.log("function initCalculator() called");
   clearCalculator();
   nStore = 0;
 }
 
 function isInteger () {
-  return resultdisp.textContent.contains(".") ? false : true; 
+  'use strict';
+  return resultdisp.textContent.contains(".") ? false : true;
 /*
   if (resultdisp.textContent.contains(".")) {
     return false;
   }
   return true;
-*/  
+*/
 }
 
+function vibrate () {  // if vibrtion enabled -> do it for configured time
+  'use strict';
+  if (oSettings.vibration) {
+    navigator.vibrate([oSettings.vibTime]);
+  }
+}
 
 function addKeyToDisplay (digit) {
+  'use strict';
 
   if(bDisplayEditable === false) { //display was not editable previously
     bDisplayEditable = true;
@@ -63,19 +100,22 @@ function addKeyToDisplay (digit) {
   if (resultdisp.textContent.length >= MAX_DISPLAY_DIGITS) { //max. characters reached
     return;
   }
-
+  if (resultdisp.textContent === "0") { //empty display shall be overwritten with input
+    resultdisp.textContent = "";
+  }
   resultdisp.textContent += digit;  //add the digit to display
   nDispValue = parseFloat(resultdisp.textContent);
 }
 
 function delKeyfromDisplay () {
+  'use strict';
 
   if(bDisplayEditable === false) {  //display is not editable
     return;
   }
   if (resultdisp.textContent.length <= 1) {
     resultdisp.textContent = "0"; //last digit replaced by '0'
-    bDisplayEditable = false;
+    //bDisplayEditable = false;
   } else {
     resultdisp.textContent = resultdisp.textContent.substring(0, resultdisp.textContent.length -1); //remove one digit
   }
@@ -86,6 +126,7 @@ function delKeyfromDisplay () {
  * Updates display with internal representation of value
  */
 function displayResult (newVal) {
+  'use strict';
   nDispValue = newVal;
   var s = newVal.toString(),
       l = s.length,
@@ -113,6 +154,7 @@ function displayResult (newVal) {
  * Updates the history display with new value
  */
 function updateHistory (newVal) {
+  'use strict';
   var s = keylogdisp.textContent + " " + newVal,
       l = s.length;
 
@@ -127,6 +169,7 @@ function updateHistory (newVal) {
  * Calculates the result of the percent operation
  */
 function calculatePercent () {
+  'use strict';
   nOperator2 = nDispValue;
 
   switch(sOperation) {
@@ -142,6 +185,7 @@ function calculatePercent () {
  * Calculates the result of the different binary operations
  */
 function calculate () {
+  'use strict';
   //if (!nOperator2) nOperator2 = nDispValue; //use nOperator2 if it is set
   nOperator2 = nDispValue;
 
@@ -155,11 +199,13 @@ function calculate () {
 }
 
 function numberKeyPressed () {
+  'use strict';
+  /*jshint validthis: true */
   var value = this.value,
       datatype =this.dataset.type;
 
   console.log("Number Key pressed ", value, datatype);
-
+  vibrate();
   switch(datatype) {
   case "number" :
     addKeyToDisplay(value);
@@ -192,17 +238,19 @@ function numberKeyPressed () {
  * and binary operations '+', '-', '*', '/'
  */
 function operationKeyPressed () {
+  'use strict';
   var value = this.value,
       datatype =this.dataset.type;
   console.log("Operation Key pressed ", value, datatype);
+  vibrate();
 
   switch(datatype) {  //contains operation type (unary, binary)
 
   //unary operations - handle display Value directly
-  case "unary" : 
+  case "unary" :
     if(bDisplayEditable) {
       updateHistory(resultdisp.textContent); //actual value to history
-    }  
+    }
       switch (value){
       case "√" :
         updateHistory("[√]"); //function key to history
@@ -227,26 +275,26 @@ function operationKeyPressed () {
     break;
 
     //binary operations need 2 operands
-    case "binary" : 
+    case "binary" :
       if(bDisplayEditable) {
         updateHistory(resultdisp.textContent); //actual value to history
       }
-
       if (sOperation === null) { //first time operation key pressed
         sOperation = value;
         nOperator1 = nDispValue;
         nOperator2 = null;
       } else {                  //subsequent operation key pressed
-        if (bDisplayEditable) { //only if normal key pressed meanwhile
+//        if (bDisplayEditable) { //only if normal key pressed meanwhile
           updateHistory("[=]");
           displayResult(calculate());
           sOperation = value;
           nOperator1 = nDispValue;
-        }
+//        }
       }
       updateHistory(value); //always operation key to history
+
       break;
-    
+
     default: break;
   }
 
@@ -256,40 +304,50 @@ function operationKeyPressed () {
 
 /**
  * A special key is pressed
- * For now this are only 'Sto' and 'Rcl' keys
+ * This are only 'Sto', 'Rcl', ConvertTo, ConvertFrom keys
  */
 function specialKeyPressed () {
-  var value = this.value,
-      datatype =this.dataset.type;
-  console.log("Special Key pressed ", value, datatype);
-
-  if(datatype === "store") {
-    nStore = nDispValue; //save display to memory
+//  var value = this.value,
+//      datatype =this.dataset.type;
+//  console.log("Special Key pressed ", value, datatype);
+  'use strict';
+  /*jshint validthis: true */
+  console.log("Special Key pressed ", this.dataset.type);
+  vibrate();
+  switch(this.dataset.type) {  //contais the different keys
+    case "store" :
+      nStore = nDispValue;     //save display to memory
+      break;
+    case "recall" :
+      displayResult (nStore);  //display content of memory
+      bDisplayEditable = true; //set mode editable (important for UpdateHistory)
+      break;
+    case "convertto" :
+      if(bDisplayEditable) {
+        updateHistory(resultdisp.textContent); //actual value to history
+      }
+      updateHistory("[\u2192" + oSettings.convertUnitTo + "]");
+      displayResult (nDispValue * oSettings.unitRatio);
+      bDisplayEditable = false;
+      break;
+    case "convertfrom" :
+      if(bDisplayEditable) {
+        updateHistory(resultdisp.textContent); //actual value to history
+      }
+      updateHistory("[\u2192" + oSettings.convertUnitFrom + "]");
+      displayResult (nDispValue / oSettings.unitRatio);
+      bDisplayEditable = false;
+      break;
   }
-  if(datatype === "recall") {
-    displayResult (nStore);  //display content of memory
-    bDisplayEditable = true; //set mode editable (important for UpdateHistory)
-  }
-
-}
-
-/**
- * Key 'Convert-To' or 'Convert-From' key is pressed
- */
-function convertKeyPressed () {
-  var value = this.value,
-      datatype =this.dataset.type;
-  console.log("Convert Key pressed ", value, datatype);
 }
 
 /**
  * The calculate key ('=') is pressed
  */
 function calculateKeyPressed () {
-  var value = this.value,
-      datatype =this.dataset.type;
-  console.log("Compute Key pressed ", value, datatype);
-
+  'use strict';
+  console.log("Compute Key pressed ");
+  vibrate();
   if (sOperation !== null) {
     if (bDisplayEditable) {
       updateHistory(resultdisp.textContent);
@@ -307,9 +365,12 @@ function calculateKeyPressed () {
  * The 'Clear-All' key ('C')  or 'Delete digit' ('<-') is pressed
  */
 function clearKeyPressed () {
+  'use strict';
+  /*jshint validthis: true */
   var value = this.value,
       datatype =this.dataset.type;
   console.log("Clear Key pressed ", value, datatype);
+  vibrate();
 
   switch(datatype)
   {
@@ -325,10 +386,12 @@ function clearKeyPressed () {
  * Initialize the application and register event listener functions
  */
 window.onload = function () {
+  'use strict';
+  var clickEvent = ('ontouchstart' in window ? 'touchend' : 'click');  //prefer touch events if available (faster reaction)
+
   // elements that that are often used in the code
   resultdisp = document.getElementById("result");
   keylogdisp = document.getElementById("keylog");
-  var clickEvent = ('ontouchstart' in window ? 'touchend' : 'click');  //prefer touch events if available (faster reaction)
 
   // All the listeners for the interface buttons and for the input changes
   // This is an awful hack as getElementsByID could not be used, because
@@ -340,7 +403,7 @@ window.onload = function () {
   for(i=0 ; i<bk.length ; i++) {
     switch(bk[i].id) {  //different ID's for differnet type of keys
       case "num-key" :
-        bk[i].addEventListener(clickEvent, numberKeyPressed);
+        bk[i].addEventListener('click', numberKeyPressed);
         break;
       case "oper-key" :
         bk[i].addEventListener(clickEvent, operationKeyPressed);
@@ -359,8 +422,8 @@ window.onload = function () {
     }
   }
 
-  document.getElementById('btn-convertto').addEventListener(clickEvent, convertKeyPressed);
-  document.getElementById('btn-convertfrom').addEventListener(clickEvent, convertKeyPressed);
+  document.getElementById('btn-convertto').addEventListener(clickEvent, specialKeyPressed);
+  document.getElementById('btn-convertfrom').addEventListener(clickEvent, specialKeyPressed);
 
 
   initCalculator();

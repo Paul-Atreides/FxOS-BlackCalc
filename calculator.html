@@ -14,6 +14,7 @@
   <body>
     <section role="region" data-position="current">
       <header class="app-header">
+        <a class="calc-icon menu btn-notext" href="#config-page">Config</a>
         <h1>Black Calculator</h1>
       </header>
 
@@ -25,8 +26,8 @@
     <section class="convert-row">
     <div class="keypad-row">
       <div class="convert-description" role="description" value="">Convert to:</div>
-      <div id="btn-convertto" class="convert-btn" role="key" data-value="EURO">€</div>
-      <div id="btn-convertfrom" class="convert-btn" role="key" data-value="Dollar">$</div>
+      <div id="btn-convertto" class="convert-btn" role="key" data-type="convertto">km/h</div>
+      <div id="btn-convertfrom" class="convert-btn" role="key" data-type="convertfrom">m/s</div>
     </div>
     </section>
 
@@ -34,8 +35,8 @@
     <div class="keypad-row">
       <input type="button" class="keypad-button" id="clear-key"	  value="C"   data-type="clear"/>
       <input type="button" class="keypad-button" id="clear-key" 	value="←"   data-type="delete"/>
-      <input type="button" class="keypad-button" id="spec-key"  	value="Sto" data-type="store"/>
-      <input type="button" class="keypad-button" id="spec-key"  	value="Rcl" data-type="recall"/>
+      <input type="button" class="keypad-button" id="btn-sto"  	value="Sto" data-type="store"/>
+      <input type="button" class="keypad-button" id="btn-rcl"  	value="Rcl" data-type="recall"/>
       <input type="button" class="keypad-button" id="oper-key"  	value="%" 	data-type="unary" />
     </div>
 

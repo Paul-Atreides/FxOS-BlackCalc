@@ -1,3 +1,4 @@
+@import url(icons/calc_icons.css);
 /*
  * Initializing defaults for html and body tags
  */
@@ -16,13 +17,22 @@ body {
 /*  height: 100%; */
   display: block;
   overflow: hidden;
-  font-family: "fira sans", "sans-serif";
+  font-family: "fira sans", "sans-serif", "Microsoft Sans Serif";
 }
+
 
 /*
  * This are the fixed settings for display size lt. 460px (=480px display - 20px status display)
  * Should only occur when screen keyboard is displayed
  */
+
+/*
+ * overrides calc_icons.css for better position of menu icon
+ */
+
+.menu:before {
+  background-position: 0px -2.8rem;
+ }
 
 /*
  * Headline for application Name
@@ -58,6 +68,13 @@ header h1 {
   padding: 0 1rem;
   font-weight: 300;
   text-align: center;
+}
+
+header:first-child a.btn-notext, section[role="region"] > header:first-child button.btn-notext {
+    text-align: unset;
+    vertical-align: middle;
+    font-size: 0px;
+    display: block;
 }
 
 /*
@@ -185,8 +202,12 @@ input {
 
   /* 1.0vh = 4.6 px at hight 460px  = 5.15 px at 515px */
 
+  html, body {
+   font-size: 2.174vh;  /* increase base font-size - important for icon scaling */
+  }
+
   header h1 {
-    font-size: 4.3vh;
+/*    font-size: 4.3vh; */
     height: 6.96vh;
     line-height: 6.96vh;
   }
@@ -196,19 +217,19 @@ input {
 
   .display #result {
     height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
-    line-height: calc(10.1vh + 9px);
+/*    line-height: calc(10.1vh + 9px); */
   }
 
   #keylog {
     height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
-    line-height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
-    font-size: 3.25vh;               /* 1.5rem at 460px -> 1.68rem at 515px */
+/*    line-height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
+/*    font-size: 3.25vh;               /* 1.5rem at 460px -> 1.68rem at 515px */
   }
 
   .keypad-button {
     height: calc(14vh - 2px);  /* 62px at 460px -> 70px at 515px */
     padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
-    font-size: 6.5vh;               /* 3rem at 460px -> 3.3rem at 515px */
+/*    font-size: 6.5vh;               /* 3rem at 460px -> 3.3rem at 515px */
   }
 
 }
@@ -219,16 +240,20 @@ input {
 
   /* 1.0vw = 3.2 px at width 320px */
 
+  html, body {
+   font-size: 3.125vw;  /* increase base font-size - important for icon scaling */
+  }
+
   header h1 {
-    font-size: 6.25vw;
+/*    font-size: 6.25vw; */
   }
 
   .display #result {
-    font-size: 14vw;
+/*    font-size: 14vw; */
   }
 
   #keylog {
-    font-size: 5vw;
+/*    font-size: 5vw; */
   }
 
   .convert-row {
@@ -241,7 +266,7 @@ input {
 
   .keypad-button {
     width: 19.69vw;           /* 63px at width 320px */
-    font-size: 9.375vw;       /* 30px at 320px */
+/*    font-size: 9.375vw;       /* 30px at 320px */
   }
 }
 
@@ -250,7 +275,9 @@ input {
  * keyboard layout
  */
 @media (orientation: landscape) and (min-width: 479px){
-  body, html {
+
+  html, body {
+   font-size: 2.18vh;  /* increase base font-size - important for icon scaling */
     background-color: lightblue;
 
   }
@@ -265,15 +292,24 @@ input {
     padding: calc(8vh - 32px) 5px 5px;     /* 5px at 460px -> 11px at 515px */
   }
 
-  #keypad {
-    width: 100%;
+  .convert-row {
+    width: calc(100% - 20px);           /* 300px ad width 320px */
+  }
+  .convert-btn {
+    color: blue;
+    border-radius: 25px;
+    border-color: whitesmoke;
+  }
+
+  section .keypad {
+    width: calc(100% - 20px);           /* 300px ad width 320px */
   }
 
   .keypad-button {
     color: blue;
     background-color: lightblue;
-    width: calc(20% - 5px);
-    height: calc(14vh - 4px);    /* 62px at 460px -> 70px at 515px */
+    width: calc(20% - 2px);
+    height: calc(11.1vh);        /* 51px at 460px -> 57px at 515px */
     margin: 2px 1px;
     padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
     border: 2px solid;
@@ -312,6 +348,5 @@ input#clear-key{
  */
 input#compute-key{
   color: #aaf;
-  font-weight: bolder;
+  font-size: 4rem;  /* make this key larger '=' sign looks poor with normal font-size */
 }
-
