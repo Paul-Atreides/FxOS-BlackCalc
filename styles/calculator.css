@@ -31,7 +31,7 @@ body {
  */
 
 .menu:before {
-  background-position: 0px -2.8rem;
+  background-position: 0px 0.2rem;
  }
 
 /*
@@ -340,8 +340,13 @@ input#clear-key:active,
 
 /* Color of special keys (Clear all and Clear entry)
  */
-input#clear-key{
+input#clear-key{ /* old - remove when all input fields are converted */
   color: #f00;
+}
+
+#btn-clear,
+#btn-del {
+  color: red;
 }
 
 /* Color of compute key

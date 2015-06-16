@@ -1,7 +1,7 @@
 {
   "name": "Calculator",
   "description": "Simple Calculator with basic functionality, history and memory function",
-  "version": "1.2.0",
+  "version": "1.2.5",
   "type": "web",
   "launch_path": "/calculator.html",
   "developer": {

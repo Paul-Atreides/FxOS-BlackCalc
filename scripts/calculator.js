@@ -239,7 +239,7 @@ function numberKeyPressed () {
  */
 function operationKeyPressed () {
   'use strict';
-  var value = this.value,
+  var value = this.value || this.attributes.value.value,
       datatype =this.dataset.type;
   console.log("Operation Key pressed ", value, datatype);
   vibrate();
@@ -367,9 +367,9 @@ function calculateKeyPressed () {
 function clearKeyPressed () {
   'use strict';
   /*jshint validthis: true */
-  var value = this.value,
-      datatype =this.dataset.type;
-  console.log("Clear Key pressed ", value, datatype);
+  var datatype =this.dataset.type;
+
+  console.log("Clear Key pressed ", datatype);
   vibrate();
 
   switch(datatype)
@@ -403,7 +403,7 @@ window.onload = function () {
   for(i=0 ; i<bk.length ; i++) {
     switch(bk[i].id) {  //different ID's for differnet type of keys
       case "num-key" :
-        bk[i].addEventListener('click', numberKeyPressed);
+        bk[i].addEventListener(clickEvent, numberKeyPressed);
         break;
       case "oper-key" :
         bk[i].addEventListener(clickEvent, operationKeyPressed);
@@ -424,6 +424,11 @@ window.onload = function () {
 
   document.getElementById('btn-convertto').addEventListener(clickEvent, specialKeyPressed);
   document.getElementById('btn-convertfrom').addEventListener(clickEvent, specialKeyPressed);
+//  document.getElementById('btn-clear').addEventListener(clickEvent, clearKeyPressed);
+//  document.getElementById('btn-del').addEventListener(clickEvent, clearKeyPressed);
+  document.getElementById('btn-sto').addEventListener(clickEvent, specialKeyPressed);
+  document.getElementById('btn-rcl').addEventListener(clickEvent, specialKeyPressed);
+//  document.getElementById('btn-percent').addEventListener(clickEvent, operationKeyPressed);
 
 
   initCalculator();
