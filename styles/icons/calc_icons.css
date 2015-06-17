@@ -66,17 +66,17 @@ section[role="region"] > header:first-child > a .icon.calc-icon:before {
  * the background bitmap is automatically steched
  */
 
-.menu:before { background-position:  -0px -3rem; }
-.share:before { background-position:  -0px -6rem; }
-.delete:before { background-position:  -0px -9rem; }
-.info:before { background-position:  -0px -12rem; }
-.help:before { background-position:  -0px -15rem; }
-.settings:before { background-position:  -0px -18rem; }
-.pause:before { background-position:  -0px -21rem; }
-.unused:before { background-position:  -0px -24rem; }
-.unused2:before { background-position:  -0px -27rem; }
-.unused3:before { background-position:  -0px -30rem; }
-.unused4:before { background-position:  -0px -33rem; }
+.menu:before { background-position:  -0px -0rem; }
+.share:before { background-position:  -0px -3rem; }
+.delete:before { background-position:  -0px -6rem; }
+.info:before { background-position:  -0px -9rem; }
+.help:before { background-position:  -0px -12rem; }
+.settings:before { background-position:  -0px -15rem; }
+.pause:before { background-position:  -0px -18rem; }
+.unused:before { background-position:  -0px -21rem; }
+.unused2:before { background-position:  -0px -24rem; }
+.unused3:before { background-position:  -0px -27rem; }
+.unused4:before { background-position:  -0px -30rem; }
 .stop:before { background-position:  -0px -36rem; }
 .play:before { background-position:  -0px -39rem; }
 .pause:before { background-position:  -0px -42rem; }

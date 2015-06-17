@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -12,9 +12,9 @@
   </head>
 
   <body>
-    <section role="region" data-position="current">
+    <section id="main-view" role="region" class="current" data-position="current">
       <header class="app-header">
-        <a class="calc-icon menu btn-notext" href="#config-page">Config</a>
+        <a id="btn-settings" class="calc-icon menu btn-notext" href="#">Config</a>
         <h1>Black Calculator</h1>
       </header>
 
@@ -79,10 +79,32 @@
       <input type="button" class="keypad-button" id="oper-key"    value="+"   data-type="binary"/>
       <input type="button" class="keypad-button" id="num-key"     value="+/-" data-type="sign"/>
     </div>
+    </section>
 
+    <section id="settings-view" class="top skin-organic" data-position="top" role=region>
+      <article id="settings-view-body" class="content" >
+        <header class="config-header">
+          <a id="btn-settings-back" class="calc-icon share btn-notext" href="#">Main</a>
+          <h1>Settings</h1>
+        </header>
+        <section data-type="list">
+          <header>Keyboard vibration</header>
+          <ul id="record-list" data-type="edit">
+            <li>
+              <label class="pack-checkbox">
+                <input type="checkbox">
+                <span> </span>
+              </label>
+
+              <a href="#" idrecord="99">
+                <p>Vibration active</p>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </article>
     </section>
-    </section>
+
     <script type="text/javascript" src="scripts/calculator.js" ></script>
-
   </body>
 </html>

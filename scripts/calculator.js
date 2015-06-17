@@ -430,6 +430,17 @@ window.onload = function () {
   document.getElementById('btn-rcl').addEventListener(clickEvent, specialKeyPressed);
 //  document.getElementById('btn-percent').addEventListener(clickEvent, operationKeyPressed);
 
+  document.getElementById("btn-settings").addEventListener(clickEvent, function(e) {
+      var view = document.getElementById("settings-view");
+      view.classList.add("current");
+      view.classList.remove("top");
+  });
+
+  document.getElementById("btn-settings-back").addEventListener(clickEvent, function(e) {
+      var view = document.getElementById("settings-view");
+      view.classList.add("top");
+      view.classList.remove("current");
+  });
 
   initCalculator();
   console.log("window.onload finished");
