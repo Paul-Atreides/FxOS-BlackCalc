@@ -1,4 +1,5 @@
 @import url(icons/calc_icons.css);
+@import url(bb/layout.css);
 @import url(bb/lists.css);
 @import url(bb/switches.css);
 /*
@@ -407,15 +408,23 @@ section[role="region"].skin-organic  {
 */
 /* from lists.css */
 /* want the checkbox on right side */
-[data-type="list"] [data-type="edit"] li > .pack-checkbox,
-[data-type="list"] [data-type="edit"] li > .pack-radio,
-[data-type="list"] [data-type="edit"] li > .pack-switch {
-    pointer-events: auto;
-/*    left: 0;      original value */
+/*
+[data-type="list"] [data-type="edit"] li > .pack-checkbox.reverse,
+[data-type="list"] [data-type="edit"] li > .pack-radio.reverse,
+[data-type="list"] [data-type="edit"] li > .pack-switch.reverse {
+  pointer-events: auto;
   left: calc(100% - 8%);
 }
+*/
+
+[data-type="list"] li > .pack-checkbox.reverse input ~ span::after,
+[data-type="list"] li > .pack-radio.reverse input ~ span::after,
+[data-type="list"] li > .pack-switch.reverse input ~ span::after {
+    left: auto;
+    right: 0px;
+}
+
 /* want the description on left side */
-[data-type="list"] [data-type="edit"] li {
-/*    padding-left: 4rem; original value */
+[data-type="list"] [data-type="edit"] .reverse {
   padding-left: 0px;
 }
