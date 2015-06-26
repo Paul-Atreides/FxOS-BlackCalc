@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 Description: Simple Calculator with basic functionality, history and memory function
 Developed by: Paul Atreides
@@ -31,14 +31,16 @@ Math.roundN = function(num, decimals) {
   return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
 };
 
-function Settings(vibration, vibTime, keyklick, unitRatio, convertUnitFrom, convertUnitTo) {
+function Settings(vibration, vibTime, keyklick, unitConversion, unitFromValue, unitFrom, unitToValue, unitTo) {
   'use strict';
   this.vibration = vibration || false;
   this.vibTime = vibTime || 60;
   this.keyklick = keyklick || false;
-  this.unitRatio = unitRatio || 3.6;
-  this.convertUnitFrom = convertUnitFrom || "m/s";
-  this.convertUnitTo = convertUnitTo || "km/h";
+  this.unitConversion = unitConversion || true;
+  this.unitFromValue = unitFromValue || 1;
+  this.unitToValue = unitToValue || 3.6;
+  this.unitFrom = unitFrom || "m/s";
+  this.unitTo = unitTo || "km/h";
 }
 
 Settings.prototype.save = function () {
@@ -159,7 +161,7 @@ function updateHistory (newVal) {
       l = s.length;
 
   if (l > MAX_KEYLOG_DIGITS) {
-    s = "..." + s.substr(-MAX_KEYLOG_DIGITS);
+    s = "..." + s.substr(-MAX_KEYLOG_DIGITS +3);
   }
 
   keylogdisp.textContent = s;
@@ -326,16 +328,16 @@ function specialKeyPressed () {
       if(bDisplayEditable) {
         updateHistory(resultdisp.textContent); //actual value to history
       }
-      updateHistory("[\u2192" + oSettings.convertUnitTo + "]");
-      displayResult (nDispValue * oSettings.unitRatio);
+      updateHistory("[\u2192" + oSettings.unitTo + "]");
+      displayResult (nDispValue * oSettings.unitToValue / oSettings.unitFromValue);
       bDisplayEditable = false;
       break;
     case "convertfrom" :
       if(bDisplayEditable) {
         updateHistory(resultdisp.textContent); //actual value to history
       }
-      updateHistory("[\u2192" + oSettings.convertUnitFrom + "]");
-      displayResult (nDispValue / oSettings.unitRatio);
+      updateHistory("[\u2192" + oSettings.unitFrom + "]");
+      displayResult (nDispValue / oSettings.unitToValue * oSettings.unitFromValue );
       bDisplayEditable = false;
       break;
   }
@@ -431,15 +433,36 @@ window.onload = function () {
 //  document.getElementById('btn-percent').addEventListener(clickEvent, operationKeyPressed);
 
   document.getElementById("btn-settings").addEventListener(clickEvent, function(e) {
-      var view = document.getElementById("settings-view");
-      view.classList.add("current");
-      view.classList.remove("top");
+    var view = document.getElementById("settings-view");
+    view.classList.add("current");
+    view.classList.remove("top");
+    document.getElementById('btn-settings-vibrate').checked = oSettings.vibration;
+    document.getElementById('btn-settings-convert').checked = oSettings.unitConversion;
+    document.getElementById('unit-from-factor').value = oSettings.unitFromValue;
+    document.getElementById('unit-from').value = oSettings.unitFrom;
+    document.getElementById('unit-to-factor').value = oSettings.unitToValue;
+    document.getElementById('unit-to').value = oSettings.unitTo;
+
   });
 
   document.getElementById("btn-settings-back").addEventListener(clickEvent, function(e) {
-      var view = document.getElementById("settings-view");
-      view.classList.add("top");
-      view.classList.remove("current");
+    var view = document.getElementById("settings-view");
+    view.classList.add("top");
+    view.classList.remove("current");
+    oSettings.vibration = document.getElementById('btn-settings-vibrate').checked;
+    oSettings.unitConversion = document.getElementById('btn-settings-convert').checked;
+    oSettings.unitFromValue = parseFloat (document.getElementById('unit-from-factor').value);
+    oSettings.unitFrom = document.getElementById('unit-from').value;
+    oSettings.unitToValue = parseFloat (document.getElementById('unit-to-factor').value);
+    oSettings.unitTo = document.getElementById('unit-to').value;
+    document.getElementById('btn-convertto').textContent = oSettings.unitTo;
+    document.getElementById('btn-convertfrom').textContent = oSettings.unitFrom;
+    if (oSettings.unitConversion) {
+      document.getElementById("convert-row").classList.remove("hidden");
+    } else {
+      document.getElementById("convert-row").classList.add("hidden");
+    }
+
   });
 
   initCalculator();

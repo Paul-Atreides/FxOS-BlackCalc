@@ -2,6 +2,7 @@
 @import url(bb/layout.css);
 @import url(bb/lists.css);
 @import url(bb/switches.css);
+/*@import url(bb/headers.css);*/
 /*
  * Initializing defaults for html and body tags
  */
@@ -69,11 +70,26 @@ header h1 {
   overflow: hidden;
   margin: 0;
   padding: 0 1rem;
-  font-weight: 300;
+  font-weight: 600;
   text-align: center;
 }
 
-header:first-child a.btn-notext, section[role="region"] > header:first-child button.btn-notext {
+article > header:first-child h1 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    margin: 0 0 0 5rem;
+    padding: 0px 1rem;
+    height: 100%;
+    font-size: 2.3rem;
+    font-weight: 300;
+    font-style: italic;
+    text-align: left;
+}
+
+header:first-child a.btn-notext,
+section[role="region"] > header:first-child button.btn-notext {
     text-align: unset;
     vertical-align: middle;
     font-size: 0px;
@@ -83,7 +99,6 @@ header:first-child a.btn-notext, section[role="region"] > header:first-child but
 /*
  * Result display
  */
-
 section .display {
   text-align:right;
   background-color: #222;
@@ -95,6 +110,7 @@ section .display {
 .display #result {
   height: 55px;
   font-size: 4.5rem;
+  overflow: hidden;
 }
 
 /*
@@ -104,6 +120,7 @@ section .display {
   height: 16px;
   line-height: 16px;
   font-size: 1.5rem;
+  overflow: hidden;
   color: yellow;
 }
 
@@ -120,7 +137,9 @@ section .display {
   height: 30px;
   margin-top: 5px;
 }
-
+.hidden {
+  visibility: hidden;
+}
 .convert-description {
   display: table-cell;
   width: calc(2rem * 7);
@@ -206,7 +225,7 @@ input {
   /* 1.0vh = 4.6 px at hight 460px  = 5.15 px at 515px */
 
   html, body {
-   font-size: 2.174vh;  /* increase base font-size - important for icon scaling */
+   font-size: 11px;  /* increase base font-size - important for icon scaling */
   }
 
   header h1 {
@@ -219,18 +238,17 @@ input {
   }
 
   .display #result {
-    height: calc(10.1vh + 9px);            /* 55px at 460px -> 61px at 515px */
-/*    line-height: calc(10.1vh + 9px); */
+    height: calc(10.1vh + 9px);      /* 55px at 460px -> 61px at 515px */
+    font-size: 4.4rem;               /* 4.4rem * 11px = 48.4px (prevent overflow of display) */
   }
 
   #keylog {
     height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
-/*    line-height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
-/*    font-size: 3.25vh;               /* 1.5rem at 460px -> 1.68rem at 515px */
+    font-size: 1.4rem;               /* 1.4rem * 11px = 15.4px (prevent overflow of display) */
   }
 
   .keypad-button {
-    height: calc(14vh - 2px);  /* 62px at 460px -> 70px at 515px */
+    height: calc(13.1vh + 1px);     /* 63px at 460px -> 68.5px at 515px */
     padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
 /*    font-size: 6.5vh;               /* 3rem at 460px -> 3.3rem at 515px */
   }
@@ -322,8 +340,7 @@ input {
 
 }
 
-/*
- * Media independent settings
+/* Media independent settings
  */
 
 /*
@@ -337,7 +354,6 @@ input#spec-key:active,
 input#clear-key:active,
 .keypad-button:active,
 .convert-btn:active {
-
   background: #0080FF;
 }
 
@@ -358,6 +374,21 @@ input#compute-key{
   color: #aaf;
   font-size: 4rem;  /* make this key larger '=' sign looks poor with normal font-size */
 }
+
+/* Skinning of settings-page
+ */
+section[role="region"].skin-organic  {
+  color: #4D4D4D;
+  background-color: #F4F4F4;
+}
+[data-type="list"].skin-organic header {
+  color: #4D4D4D;
+  background-color: #DCDCDC;
+}
+
+/*
+ * special styles for settings view in conjuncgtion with FxOS Building-Blocks
+ */
 
 section[role="region"] {
   position: relative;
@@ -396,35 +427,60 @@ section[role="region"][data-position="top"] {
     z-index: 20;
 }
 */
-section[role="region"].skin-organic  {
-  color: #868692;
-  background-color: #F4F4F4;
-}
+
 /*
 .content {
     height: calc(100% - 3.2rem);
     top: 3.2rem;
 }
 */
-/* from lists.css */
-/* want the checkbox on right side */
-/*
-[data-type="list"] [data-type="edit"] li > .pack-checkbox.reverse,
-[data-type="list"] [data-type="edit"] li > .pack-radio.reverse,
-[data-type="list"] [data-type="edit"] li > .pack-switch.reverse {
-  pointer-events: auto;
-  left: calc(100% - 8%);
-}
-*/
 
+[data-type="list"] li {
+    height: auto;
+}
+[data-type="list"] li p:first-of-type {
+    padding: 0;
+}
+
+[data-type="list"] td {
+  font-size: 1.6rem;
+}
+
+[data-type="list"] td > input {
+  display: table-cell;
+  width: calc(100% - 6px);
+  font-size: 1.6rem;
+}
+
+/* BB-Extensions
+ */
+
+/* from lists.css
+ * want the checkbox on right side
+ */
 [data-type="list"] li > .pack-checkbox.reverse input ~ span::after,
 [data-type="list"] li > .pack-radio.reverse input ~ span::after,
 [data-type="list"] li > .pack-switch.reverse input ~ span::after {
-    left: auto;
-    right: 0px;
+  left: auto;
+  right: 0px;
 }
 
-/* want the description on left side */
+/* from lists.css
+ * want the description on left side
+ */
 [data-type="list"] [data-type="edit"] .reverse {
   padding-left: 0px;
 }
+
+/* BB-Overrides
+ */
+[data-type="list"] header {
+    padding: 0;
+    height: 3rem;
+    line-height: 3rem;
+}
+/* multiple list elements should not habe a bottom border-line
+[data-type="list"] li {
+    border-bottom: unset;
+}
+*/

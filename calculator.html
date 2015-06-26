@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <section id="main-view" role="region" class="current" data-position="current">
+    <section id="main-view" class="current" data-position="current">
       <header class="app-header">
         <a id="btn-settings" class="calc-icon menu btn-notext" href="#">Config</a>
         <h1>Black Calculator</h1>
@@ -23,7 +23,7 @@
       <div id="keylog"> </div> <!-- the keylog history display -->
     </section>
 
-    <section class="convert-row">
+    <section id="convert-row" class="convert-row hidden">
     <div class="keypad-row">
       <div class="convert-description" role="description" value="">Convert to:</div>
       <div id="btn-convertto" class="convert-btn" role="key" data-type="convertto">km/h</div>
@@ -87,20 +87,86 @@
           <a id="btn-settings-back" class="calc-icon share btn-notext" href="#">Main</a>
           <h1>Settings</h1>
         </header>
-        <section data-type="list">
-          <header>Keyboard vibration</header>
+        <section data-type="list" class="skin-organic">
+          <header>Keyboard</header>
           <ul id="record-list" data-type="edit">
             <li class="reverse">
               <label class="pack-switch reverse">
-                <input type="checkbox" checked="">
+                <input id="btn-settings-vibrate" type="checkbox" checked="">
                 <span> </span>
               </label>
-
-              <a href="#" idrecord="99">
-                <p>Vibration active</p>
-              </a>
+              <p>Vibration</p>
             </li>
+ <!--
+            <li class="reverse">
+              <label class="pack-checkbox reverse">
+                <input id="btn-settings-keyclick" type="checkbox" checked="">
+                <span> </span>
+              </label>
+              <p>Keyklick</p>
+-->
           </ul>
+        </section>
+        <section data-type="list" class="skin-organic">
+          <header>Unit conversion</header>
+          <ul data-type="edit">
+            <li class="reverse">
+              <label class="pack-switch reverse">
+                <input id="btn-settings-convert" type="checkbox" checked="">
+                <span> </span>
+              </label>
+              <p>Enabled</p>
+            </li>
+              <table>
+                <tr>
+                  <td>
+                  <input id="unit-from-factor" type="text" required="" class="unit-factor">
+                  </td>
+                  <td>
+                  <input id="unit-from" type="text" required="" class="unit-unit">
+                  </td>
+                </tr>
+                <tr>
+                  <td>equates to</td>
+                </tr>
+                <tr>
+                  <td>
+                  <input id="unit-to-factor" type="text" required="" class="unit-factor">
+                  </td>
+                  <td>
+                  <input id="unit-to" type="text" required="" class="unit-unit">
+                  </td>
+                </tr>
+              </table>
+
+          </ul>
+<!--
+          <form>
+          <header data-l10n-id="note-header">Einheiten Umrechnung
+          </header>
+          </form>
+          <table>
+            <tr>
+              <td>
+                <input id="unit1-factor" type="text" required="" class="note-elements" placeholder="1">
+              </td>
+              <td>
+                <input id="unit1-unit" type="text" required="" class="note-elements" placeholder="m/s">
+              </td>
+            </tr>
+            <tr>
+              <td>equates to</td>
+            </tr>
+            <tr>
+              <td>
+                <input id="unit2-factor" type="text" required="" class="note-elements" >
+              </td>
+              <td>
+                <input id="unit2-unit" type="text" required="" class="note-elements" >
+              </td>
+            </tr>
+          </table>
+-->
         </section>
       </article>
     </section>
