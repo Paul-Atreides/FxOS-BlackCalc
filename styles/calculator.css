@@ -408,18 +408,21 @@ section[role="region"] {
 #settings-view{
   position: fixed;
 }
-
+/*
 .current[data-position="current"] {
   transform: translate(0, 0);
   transition: transform 0.5s ease, opacity 0.2s ease;
 }
+*/
+
 .current[data-position="top"] {
     transform: translateY(0%);
     transition: transform 0.5s ease 0s, opacity 0.2s ease 0s;
 }
+
 .top[data-position="top"] {
     transform: translateY(-100%);
-    transition: transform 1.5s ease 0s, opacity 0.2s ease 0s;
+    transition: transform 0.5s ease 0s, opacity 0.2s ease 0s;
 }
 /*
 section[role="region"][data-position="top"] {

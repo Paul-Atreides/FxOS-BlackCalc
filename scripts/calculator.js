@@ -267,6 +267,9 @@ function operationKeyPressed () {
         displayResult (1.0 / nDispValue);
         break;
       case "%" :
+        if(sOperation === null) { //no previous operation
+          break;                  //do not continue
+        }
         updateHistory("[%]"); //function key to history
         displayResult (calculatePercent());
         nOperator1 = nDispValue;
