@@ -47,13 +47,33 @@ Settings.prototype.save = function () {
   // save configuration to local store
   'use strict';
   console.log("function Settings.save() called");
+  var sData = JSON.stringify(this);
+  window.localStorage.setItem("Settings", sData);
 };
 
 Settings.prototype.load = function () {
   // load configuration from local store
   'use strict';
   console.log("function Settings.load() called");
+  var sData = window.localStorage.getItem("Settings");
+  if (sData) {
+    var oData = JSON.parse(sData);
+    cloneObj (oData, this);
+  }
 };
+
+function cloneObj (from, to) {
+  'use strict';
+  var name;
+  to = to || new from.constructor();
+  for (name in from) {
+    if (typeof to[name] === "undefined") { cloneObj(from[name], null); }
+    //to[name] = typeof to[name] === "undefined" ? cloneObj(from[name], null) : to[name];
+    to[name] = from[name];
+  }
+  return to;
+}
+
 
 function clearCalculator () {
   'use strict';
@@ -66,11 +86,24 @@ function clearCalculator () {
   bDisplayEditable = true;
 
 }
+function updateConvertRow () {
+  'use strict';
+  document.getElementById('btn-convertto').textContent = oSettings.unitTo;
+  document.getElementById('btn-convertfrom').textContent = oSettings.unitFrom;
+  if (oSettings.unitConversion) {
+    document.getElementById("convert-row").classList.remove("hidden");
+  } else {
+    document.getElementById("convert-row").classList.add("hidden");
+  }
+}
+
 function initCalculator () {
   'use strict';
   console.log("function initCalculator() called");
   clearCalculator();
   nStore = 0;
+  oSettings.load();
+  updateConvertRow();
 }
 
 function isInteger () {
@@ -458,14 +491,8 @@ window.onload = function () {
     oSettings.unitFrom = document.getElementById('unit-from').value;
     oSettings.unitToValue = parseFloat (document.getElementById('unit-to-factor').value);
     oSettings.unitTo = document.getElementById('unit-to').value;
-    document.getElementById('btn-convertto').textContent = oSettings.unitTo;
-    document.getElementById('btn-convertfrom').textContent = oSettings.unitFrom;
-    if (oSettings.unitConversion) {
-      document.getElementById("convert-row").classList.remove("hidden");
-    } else {
-      document.getElementById("convert-row").classList.add("hidden");
-    }
-
+    updateConvertRow();
+    oSettings.save();
   });
 
   initCalculator();
