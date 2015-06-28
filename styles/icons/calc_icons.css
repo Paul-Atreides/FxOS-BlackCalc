@@ -67,10 +67,10 @@ section[role="region"] > header:first-child > a .icon.calc-icon:before {
  */
 
 .menu:before { background-position:  -0px -0rem; }
-.share:before { background-position:  -0px -3rem; }
-.delete:before { background-position:  -0px -6rem; }
-.info:before { background-position:  -0px -9rem; }
-.help:before { background-position:  -0px -12rem; }
+.menu-black:before { background-position:  -0px -3rem; }
+.back-white:before { background-position:  -0px -6rem; }
+.back-gray:before { background-position:  -0px -9rem; }
+.back-black:before { background-position:  -0px -12rem; }
 .settings:before { background-position:  -0px -15rem; }
 .pause:before { background-position:  -0px -18rem; }
 .unused:before { background-position:  -0px -21rem; }
