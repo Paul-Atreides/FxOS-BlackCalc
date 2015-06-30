@@ -1,4 +1,4 @@
-﻿/*
+/*
 
 Description: Simple Calculator with basic functionality, history and memory function
 Developed by: Paul Atreides
