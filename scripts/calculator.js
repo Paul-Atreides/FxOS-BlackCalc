@@ -236,7 +236,7 @@ function calculate () {
 function numberKeyPressed () {
   'use strict';
   /*jshint validthis: true */
-  var value = this.value,
+  var value = this.attributes.value.value,
       datatype =this.dataset.type;
 
   console.log("Number Key pressed ", value, datatype);
@@ -245,7 +245,7 @@ function numberKeyPressed () {
   case "number" :
     addKeyToDisplay(value);
     break;
-  case "sign"  :
+  case "sgn"  :
     if (!bDisplayEditable) {
       updateHistory("[+/-]");
     }
@@ -275,14 +275,14 @@ function numberKeyPressed () {
 function operationKeyPressed () {
   'use strict';
   var value = this.value || this.attributes.value.value,
-      datatype =this.dataset.type;
+      datatype = this.dataset.type;
   console.log("Operation Key pressed ", value, datatype);
   vibrate();
 
   switch(datatype) {  //contains operation type (unary, binary)
 
   //unary operations - handle display Value directly
-  case "unary" :
+  case "unary-operation" :
     if(bDisplayEditable) {
       updateHistory(resultdisp.textContent); //actual value to history
     }
@@ -313,7 +313,7 @@ function operationKeyPressed () {
     break;
 
     //binary operations need 2 operands
-    case "binary" :
+    case "binary-operation" :
       if(bDisplayEditable) {
         updateHistory(resultdisp.textContent); //actual value to history
       }
@@ -431,30 +431,21 @@ window.onload = function () {
   resultdisp = document.getElementById("result");
   keylogdisp = document.getElementById("keylog");
 
-  // All the listeners for the interface buttons and for the input changes
-  // This is an awful hack as getElementsByID could not be used, because
-  // several keys share the same ID
-  var bk = document.getElementsByTagName('*'),
+  // Event listener functions for normal and operation keys
+  //
+  var bk = document.getElementsByClassName('keypad-button'),
       i;
-  console.log("found n Elements by TagName '*'", bk.length);
-
+  console.log("found n Elements by ClassName '*'", bk.length);
   for(i=0 ; i<bk.length ; i++) {
-    switch(bk[i].id) {  //different ID's for differnet type of keys
-      case "num-key" :
+    switch(bk[i].dataset.type) {  //different types for differnet keys
+      case "number" :
+      case "point" :
+      case "sgn" :
         bk[i].addEventListener(clickEvent, numberKeyPressed);
         break;
-      case "oper-key" :
+      case "unary-operation" :
+      case "binary-operation" :
         bk[i].addEventListener(clickEvent, operationKeyPressed);
-        break;
-      case "spec-key" :
-        bk[i].addEventListener(clickEvent, specialKeyPressed);
-        break;
-      case "compute-key" :
-        bk[i].addEventListener(clickEvent, calculateKeyPressed);
-        break;
-      case "clear-key" :
-        bk[i].addEventListener(clickEvent, clearKeyPressed);
-        //bk[i].onclick = clearKeyPressed;
         break;
       default : break;
     }
@@ -462,11 +453,11 @@ window.onload = function () {
 
   document.getElementById('btn-convertto').addEventListener(clickEvent, specialKeyPressed);
   document.getElementById('btn-convertfrom').addEventListener(clickEvent, specialKeyPressed);
-//  document.getElementById('btn-clear').addEventListener(clickEvent, clearKeyPressed);
-//  document.getElementById('btn-del').addEventListener(clickEvent, clearKeyPressed);
+  document.getElementById('btn-clear').addEventListener(clickEvent, clearKeyPressed);
+  document.getElementById('btn-del').addEventListener(clickEvent, clearKeyPressed);
   document.getElementById('btn-sto').addEventListener(clickEvent, specialKeyPressed);
   document.getElementById('btn-rcl').addEventListener(clickEvent, specialKeyPressed);
-//  document.getElementById('btn-percent').addEventListener(clickEvent, operationKeyPressed);
+  document.getElementById('btn-compute').addEventListener(clickEvent, calculateKeyPressed);
 
   document.getElementById("btn-settings").addEventListener(clickEvent, function(e) {
     var view = document.getElementById("settings-view");
@@ -478,7 +469,6 @@ window.onload = function () {
     document.getElementById('unit-from').value = oSettings.unitFrom;
     document.getElementById('unit-to-factor').value = oSettings.unitToValue;
     document.getElementById('unit-to').value = oSettings.unitTo;
-
   });
 
   document.getElementById("btn-settings-back").addEventListener(clickEvent, function(e) {

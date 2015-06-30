@@ -58,9 +58,9 @@ header.fixed {
 /*
 header:first-child {
   border: none;
-
 }
 */
+
 header h1 {
   font-size: 2rem;
   height: 32px;
@@ -107,7 +107,7 @@ section .display {
   padding: 5px 5px;
 }
 
-.display #result {
+#result {
   height: 55px;
   font-size: 4.5rem;
   overflow: hidden;
@@ -129,8 +129,8 @@ section .display {
  */
 
 .convert-row {
-  width: 300px;           /* 320px - 2*10px margin */
-  margin: 5px 10px;
+  width: 280px;           /* 320px - 2*20px margin */
+  margin: 5px 20px;
   display: table;
   table-layout: fixed;
   visibility: visible;
@@ -143,7 +143,7 @@ section .display {
 .convert-description {
   display: table-cell;
   width: calc(2rem * 7);
-  padding-left: 20px;
+  /* padding-left: 20px;      /* does *NOT* work on FxOS 1.3 as expected */
   margin: 0 5px;
   font-size: 2rem;
   overflow:hidden;
@@ -178,21 +178,22 @@ section .keypad {
 }
 .keypad-button {
   display: table-cell;
-  height: 62px;
-  width: 63px;
+  height: 60px;
+  /* width: 63px;      /* -let system calculate */
   font-size: 3.0rem;
   font-weight: 400;
-  margin: 0 -3px 0 0;
-  border: 1px solid transparent;
-  padding: 0px 0.5rem 0.9rem 0px;
+  /* border: 1px solid transparent;   /* is invisible */
+  /* padding: 0px 0.5rem 0.9rem 0px;  /* does *NOT* work on FxOS 1.3 as expected */
   overflow: hidden;
   text-align: center;
   vertical-align: middle;
   box-sizing: border-box;
-  border: 1px solid transparent;
   background: transparent;
   color: white;
+}
 
+.keypad-button.small {
+  font-size: 2.5rem;        /* make right row of keypad smaller */
 }
 
 /*
@@ -212,6 +213,45 @@ input {
   margin-right: -3px;
 }
 */
+/*
+ * Background Color of active keys (while pressed
+ */
+input#button-key:active,
+input#num-key:active,
+input#oper-key:active,
+input#compute-key:active,
+input#spec-key:active,
+input#clear-key:active,
+.keypad-button:active,
+.convert-btn:active {
+  background: #0080FF;
+}
+
+/* Color of special keys (Clear all and Clear entry)
+ */
+#btn-clear,
+#btn-del {
+  color: #ff0000;
+}
+
+/* Color of compute key
+ */
+#btn-compute {
+  color: #aaf;
+  font-size: 4rem;  /* make this key larger '=' sign looks poor with normal font-size */
+}
+
+/* Skinning of settings-page
+ */
+section[role="region"].skin-organic  {
+  color: #4D4D4D;
+  background-color: #F4F4F4;
+}
+[data-type="list"].skin-organic header {
+  color: #4D4D4D;
+  background-color: #DCDCDC;
+}
+
 
 /*
  * 'ZTE Open C' has physical display dimensions of 480 x 800 px
@@ -224,9 +264,11 @@ input {
 
   /* 1.0vh = 4.6 px at hight 460px  = 5.15 px at 515px */
 
+/*
   html, body {
-   font-size: 11px;  /* increase base font-size - important for icon scaling */
+   font-size: 11px;  /* increase base font-size - important for icon scaling
   }
+*/
 
   header h1 {
 /*    font-size: 4.3vh; */
@@ -234,22 +276,19 @@ input {
     line-height: 6.96vh;
   }
 
-  section .display {
-  }
-
   .display #result {
     height: calc(10.1vh + 9px);      /* 55px at 460px -> 61px at 515px */
-    font-size: 4.4rem;               /* 4.4rem * 11px = 48.4px (prevent overflow of display) */
+/*    font-size: 4.4rem;               /* 4.4rem * 11px = 48.4px (prevent overflow of display) */
   }
 
   #keylog {
     height: 3.5vh;                    /* 16px at 460px -> 18px at 515px */
-    font-size: 1.4rem;               /* 1.4rem * 11px = 15.4px (prevent overflow of display) */
+/*    font-size: 1.4rem;               /* 1.4rem * 11px = 15.4px (prevent overflow of display) */
   }
 
   .keypad-button {
-    height: calc(13.1vh + 1px);     /* 63px at 460px -> 68.5px at 515px */
-    padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
+    height: 13.1vh;               /* 62px at 460px -> 67.5px at 515px */
+/*    padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px - does *NOT* work on FxOS 1.3
 /*    font-size: 6.5vh;               /* 3rem at 460px -> 3.3rem at 515px */
   }
 
@@ -295,7 +334,7 @@ input {
  * Test for landscape orientation but there must be a complet different
  * keyboard layout
  */
-@media (orientation: landscape) and (min-width: 479px){
+@media (orientation: landscape) and (min-width: 459px){
 
   html, body {
    font-size: 2.18vh;  /* increase base font-size - important for icon scaling */
@@ -305,6 +344,10 @@ input {
 
   .app-name {
     display: none;
+  }
+
+  section .display {
+  margin: 2px 2px;
   }
 
   #result {
@@ -330,61 +373,21 @@ input {
     color: blue;
     background-color: lightblue;
     width: calc(20% - 2px);
-    height: calc(11.1vh);        /* 51px at 460px -> 57px at 515px */
+    height: 11.5vh;              /* 37px at 320px height */
     margin: 2px 1px;
-    padding-bottom: 2vh;         /*  9px at 460px -> 10px at 515px */
+    padding-bottom: 2vh;         /* 6.4px at 320px height */
     border: 2px solid;
     border-radius: 25px;
     border-color: whitesmoke;
   }
 
+  #btn-compute {
+    color: #000;
+  }
 }
 
 /* Media independent settings
  */
-
-/*
- * Background Color of active keys (while pressed
- */
-input#button-key:active,
-input#num-key:active,
-input#oper-key:active,
-input#compute-key:active,
-input#spec-key:active,
-input#clear-key:active,
-.keypad-button:active,
-.convert-btn:active {
-  background: #0080FF;
-}
-
-/* Color of special keys (Clear all and Clear entry)
- */
-input#clear-key{ /* old - remove when all input fields are converted */
-  color: #f00;
-}
-
-#btn-clear,
-#btn-del {
-  color: red;
-}
-
-/* Color of compute key
- */
-input#compute-key{
-  color: #aaf;
-  font-size: 4rem;  /* make this key larger '=' sign looks poor with normal font-size */
-}
-
-/* Skinning of settings-page
- */
-section[role="region"].skin-organic  {
-  color: #4D4D4D;
-  background-color: #F4F4F4;
-}
-[data-type="list"].skin-organic header {
-  color: #4D4D4D;
-  background-color: #DCDCDC;
-}
 
 /*
  * special styles for settings view in conjuncgtion with FxOS Building-Blocks
@@ -485,8 +488,8 @@ textarea {
 
 #calc-info p {
   font-size: 1.6rem;
+  margin-top: 0.5rem;
 }
-
 
 /*
 input:focus,
@@ -520,10 +523,12 @@ textarea:focus,
 /* BB-Overrides
  */
 [data-type="list"] header {
-    padding: 0;
-    height: 3rem;
-    line-height: 3rem;
+  padding: 0 1rem;
+  height: 3rem;
+  line-height: 3rem;
+  margin: 0px -1rem;
 }
+
 /* multiple list elements should not habe a bottom border-line
 [data-type="list"] li {
     border-bottom: unset;

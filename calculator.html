@@ -15,70 +15,63 @@
     <section id="main-view" class="current" data-position="current">
       <header class="app-header">
         <a id="btn-settings" class="calc-icon menu btn-notext" href="#">Config</a>
-        <h1>Black Calculator</h1>
+        <h1 class="app-name">Black Calculator</h1>
       </header>
 
-    <section class="display">
-      <div id="result">0</div> <!-- the result display -->
-      <div id="keylog"> </div> <!-- the keylog history display -->
-    </section>
+      <section class="display">
+        <div id="result">0</div> <!-- the result display -->
+        <div id="keylog"> </div> <!-- the keylog history display -->
+      </section>
 
-    <section id="convert-row" class="convert-row hidden">
-    <div class="keypad-row">
-      <div class="convert-description" role="description" value="">Convert to:</div>
-      <div id="btn-convertto" class="convert-btn" role="key" data-type="convertto">km/h</div>
-      <div id="btn-convertfrom" class="convert-btn" role="key" data-type="convertfrom">m/s</div>
-    </div>
-    </section>
+      <section id="convert-row" class="convert-row hidden">
+        <div class="keypad-row">
+          <div class="convert-description" role="description" value="">Convert to:</div>
+          <div id="btn-convertto" class="convert-btn" role="key" data-type="convertto">km/h</div>
+          <div id="btn-convertfrom" class="convert-btn" role="key" data-type="convertfrom">m/s</div>
+        </div>
+      </section>
 
-    <section class="keypad">
-    <div class="keypad-row">
-      <input type="button" class="keypad-button" id="clear-key"   value="C"   data-type="clear"/>
-      <input type="button" class="keypad-button" id="clear-key"   value="←"   data-type="delete"/>
-      <input type="button" class="keypad-button" id="btn-sto"   value="Sto" data-type="store"/>
-      <input type="button" class="keypad-button" id="btn-rcl"   value="Rcl" data-type="recall"/>
-      <input type="button" class="keypad-button" id="oper-key"    value="%"   data-type="unary" />
-      <!--
-      <div id="btn-clear" class="keypad-button" role="key" data-type="clear">C</div>
-      <div id="btn-del" class="keypad-button" role="key" data-type="delete">←</div>
-      <div id="btn-sto" class="keypad-button" role="key" data-type="store">Sto</div>
-      <div id="btn-rcl" class="keypad-button" role="key" data-type="recall">Rcl</div>
-      <div id="btn-percent" class="keypad-button" role="key" data-type="unary" value="%">%</div>
-      -->
-    </div>
+      <section class="keypad">
+        <div class="keypad-row">
+          <div id="btn-clear" class="keypad-button" role="key" data-type="clear">Clr</div>
+          <div id="btn-del" class="keypad-button" role="key" data-type="delete">&#8678;</div> <!--  &#9003; &#8678; -->
+          <div id="btn-sto" class="keypad-button" role="key" data-type="store">Sto</div>
+          <div id="btn-rcl" class="keypad-button" role="key" data-type="recall">Rcl</div>
+          <div id="btn-percent" class="keypad-button" role="key" data-type="unary-operation" value="%">%</div>
+        </div>
 
+        <div class="keypad-row">
+          <div id="btn-num7" class="keypad-button" role="key" data-type="number" value="7">7</div>
+          <div id="btn-num8" class="keypad-button" role="key" data-type="number" value="8">8</div>
+          <div id="btn-num9" class="keypad-button" role="key" data-type="number" value="9">9</div>
+          <div id="btn-div" class="keypad-button" role="key" data-type="binary-operation" value="÷">&#247;</div>
+          <div id="btn-sqrt" class="keypad-button small" role="key" data-type="unary-operation" value="√">&#8730;</div>
+        </div>
 
-    <div class="keypad-row">
-      <input type="button" class="keypad-button" id="num-key"   value="7"     data-type="number"/>
-      <input type="button" class="keypad-button" id="num-key"   value="8"     data-type="number"/>
-      <input type="button" class="keypad-button" id="num-key"   value="9"     data-type="number"/>
-      <input type="button" class="keypad-button" id="oper-key"  value="÷"   data-type="binary" />
-      <input type="button" class="keypad-button" id="oper-key"  value="√"  data-type="unary" />
-    </div>
+        <div class="keypad-row">
+          <div id="btn-num4" class="keypad-button" role="key" data-type="number" value="4">4</div>
+          <div id="btn-num5" class="keypad-button" role="key" data-type="number" value="5">5</div>
+          <div id="btn-num6" class="keypad-button" role="key" data-type="number" value="6">6</div>
+          <div id="btn-mul"  class="keypad-button" role="key" data-type="binary-operation" value="×">&#215;</div>
+          <div id="btn-sqr"  class="keypad-button small" role="key" data-type="unary-operation" value="x²">x²</div>
+        </div>
 
-    <div class="keypad-row">
-      <input type="button" class="keypad-button" id="num-key" value="4"   data-type="number"/>
-      <input type="button" class="keypad-button" id="num-key" value="5"   data-type="number" />
-      <input type="button" class="keypad-button" id="num-key" value="6"   data-type="number" />
-      <input type="button" class="keypad-button" id="oper-key" value="×"  data-type="binary"/>
-      <input type="button" class="keypad-button" id="oper-key" value="x²" data-type="unary"/>
-    </div>
+        <div class="keypad-row">
+          <div id="btn-num1" class="keypad-button" role="key" data-type="number" value="1">1</div>
+          <div id="btn-num2" class="keypad-button" role="key" data-type="number" value="2">2</div>
+          <div id="btn-num3" class="keypad-button" role="key" data-type="number" value="3">3</div>
+          <div id="btn-minus"  class="keypad-button" role="key" data-type="binary-operation" value="-">&#8722;</div>
+          <div id="btn-1x"  class="keypad-button small" role="key" data-type="unary-operation" value="1/x">1/x</div>
+        </div>
 
-    <div class="keypad-row">
-      <input type="button" class="keypad-button" id="num-key" value="1" data-type="number"/>
-      <input type="button" class="keypad-button" id="num-key" value="2" data-type="number"/>
-      <input type="button" class="keypad-button" id="num-key" value="3" data-type="number" />
-      <input type="button" class="keypad-button" id="oper-key" value="-" data-type="binary"/>
-      <input type="button" class="keypad-button" id="oper-key"  value="1/x"   data-type="unary"/>
-    </div>
-
-    <div class="keypad-row">
-      <input type="button" class="keypad-button" id="num-key"     value="0"   data-type="number"/>
-      <input type="button" class="keypad-button" id="num-key"     value="."   data-type="point"/>
-      <input type="button" class="keypad-button" id="compute-key" value="="   data-type="compute" />
-      <input type="button" class="keypad-button" id="oper-key"    value="+"   data-type="binary"/>
-      <input type="button" class="keypad-button" id="num-key"     value="+/-" data-type="sign"/>
-    </div>
+        <div class="keypad-row">
+          <div id="btn-num0" class="keypad-button" role="key" data-type="number" value="0">0</div>
+          <div id="btn-point" class="keypad-button" role="key" data-type="point" value=".">.</div>
+          <div id="btn-compute" class="keypad-button" role="key" data-type="compute" value="=">=</div>
+          <div id="btn-plus"  class="keypad-button" role="key" data-type="binary-operation" value="+">+</div>
+          <div id="btn-sgn"  class="keypad-button small" role="key" data-type="sgn" value="+/-">+/-</div>
+        </div>
+      </section>
     </section>
 
     <section id="settings-view" class="top skin-organic" data-position="top" role=region>
@@ -104,6 +97,7 @@
                 <span> </span>
               </label>
               <p>Keyklick</p>
+            </li>
 -->
           </ul>
         </section>
@@ -117,32 +111,25 @@
               </label>
               <p>Enabled</p>
             </li>
-              <table>
-                <tr>
-                  <td>
-                  <input id="unit-from-factor" type="number" required="" class="unit-value">
-                  </td>
-                  <td>
-                  <input id="unit-from" type="text" required="" class="unit-unit">
-                  </td>
-                </tr>
-                <tr>
-                  <td>equates to</td>
-                </tr>
-                <tr>
-                  <td>
-                  <input id="unit-to-factor" type="number" required="" class="unit-value">
-                  </td>
-                  <td>
-                  <input id="unit-to" type="text" required="" class="unit-unit">
-                  </td>
-                </tr>
-              </table>
+            <table>
+              <tr>
+                <td> <input id="unit-from-factor" type="number" required="" class="unit-value"> </td>
+                <td> <input id="unit-from" type="text" required="" class="unit-unit"> </td>
+              </tr>
+              <tr>
+                <td>equates to</td>
+              </tr>
+              <tr>
+                <td> <input id="unit-to-factor" type="number" required="" class="unit-value"> </td>
+                <td> <input id="unit-to" type="text" required="" class="unit-unit"> </td>
+              </tr>
+            </table>
           </ul>
+          <br>
         </section>
         <section id="calc-info" data-type="list" class="skin-organic">
+          <header>Infromation</header>
           <p>
-            <br>
             <a href="https://github.com/Paul-Atreides/FxOS-BlackCalc" target="_blank">Black Calculator</a>
             Vers. <span id="calc-version">2.0</span>
             <br>
