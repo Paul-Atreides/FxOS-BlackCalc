@@ -17,15 +17,7 @@ var nDispValue, nOperator1, nOperator2, nStore;
 var bDisplayEditable;
 var oSettings = new Settings(true);
 
-//MathX.prototype=new Object();
-function MathX () { }
-//MathX.prototype = {};
-
-MathX.round = function(num, decimals) {
-  'use strict';
-  return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
-};
-
+//Extension to builtin Math functionality
 Math.roundN = function(num, decimals) {
   'use strict';
   return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
@@ -174,7 +166,6 @@ function displayResult (newVal) {
     if (l > MAX_DISPLAY_DIGITS) {
       if((nDezPos > 0) && (nDezPos < MAX_DISPLAY_DIGITS)) {
         //TODO: if newVal < 1e-8 leave it in exponential notation
-//      s = MathX.round(newVal, MAX_DISPLAY_DIGITS - nDezPos -1).toString();
         s = Math.roundN(newVal, MAX_DISPLAY_DIGITS - nDezPos -1).toString();
       }
     }
